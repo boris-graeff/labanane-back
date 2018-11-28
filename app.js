@@ -1,4 +1,5 @@
 var express = require('express'),
+    cors = require('cors'),
     path = require('path'),
     logger = require('morgan'),
     bodyParser = require('body-parser'),
@@ -10,19 +11,15 @@ require('./cron-tasks')
 
 var app = express()
 
+// enable cors
+app.use(cors())
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 
 app.use('/services/', services)
 
