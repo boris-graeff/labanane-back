@@ -78,7 +78,7 @@ router.put('/playlists', (req, res) => {
             timestamp: Date.now()
         }
 
-    Playlist.findOneAndUpdate(key, content, (err, playlist) => {
+    Playlist.findOneAndUpdate(key, content, { new: true }, (err, playlist) => {
         if (err) {
             res.status(500).send({error: "Unexpected error"})
         }
@@ -101,10 +101,10 @@ router.post('/playlists/auth', (req, res) => {
             res.status(500).send({error: "Unexpected error"})
         }
         else if (!playlist) {
-            res.status(422).send({error: "Bad password"})
+            res.json(false)
         }
         else {
-            res.json('ok')
+            res.json(true)
         }
     })
 })
