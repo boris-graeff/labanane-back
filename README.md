@@ -1,6 +1,8 @@
 # labanane
 
-> LaBanane backend app
+> LaBanane backend
+
+Please note that ffmpeg is required
 
 ## Build Setup
 
